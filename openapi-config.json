@@ -1,0 +1,16 @@
+{
+  "input": "https://bouqed-api-dev-ejhcbwd2b5a9cfas.canadacentral-01.azurewebsites.net/swagger/v1/swagger.json",
+  "output": "./src/api",
+  "useOptions": true,
+  "useUnionTypes": true,
+  "exportCore": true,
+  "exportServices": true,
+  "exportModels": true,
+  "exportSchemas": false,
+  "indent": "2",
+  "postfixServices": "Service",
+  "postfixModels": "",
+  "write": true,
+  "clientName": "ApiClient",
+  "httpClient": "axios"
+}

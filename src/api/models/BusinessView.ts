@@ -1,0 +1,30 @@
+/* generated using openapi-typescript-codegen -- do not edit */
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+export type BusinessView = {
+  id?: string;
+  name?: string | null;
+  description?: string | null;
+  address?: string | null;
+  city?: string | null;
+  state?: string | null;
+  country?: string | null;
+  zipCode?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  website?: string | null;
+  logo?: string | null;
+  coverPhoto?: string | null;
+  officeAddress?: string | null;
+  businessCapacity?: string | null;
+  cacDocumentReference?: string | null;
+  meansOfIdentification?: string | null;
+  facebook?: string | null;
+  instagram?: string | null;
+  twitter?: string | null;
+  linkedIn?: string | null;
+  youTube?: string | null;
+  isSaved?: boolean;
+};
+
