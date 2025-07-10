@@ -1,9 +1,10 @@
+import { apiClient } from '@/api/client';
+import type { LoginModel } from '@/api/models/LoginModel';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from '@tanstack/react-router';
 import * as yup from 'yup';
-import { ApiClient } from '@/api/ApiClient';
-import type { LoginModel } from '@/api/models/LoginModel';
 
 const loginSchema = yup.object({
   email: yup
@@ -21,8 +22,11 @@ const loginSchema = yup.object({
 export type LoginFormData = yup.InferType<typeof loginSchema>;
 
 export const useLogin = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [needsEmailVerification, setNeedsEmailVerification] = useState(false);
+  const [userEmail, setUserEmail] = useState<string>('');
 
   const form = useForm<LoginFormData>({
     resolver: yupResolver(loginSchema),
@@ -37,10 +41,10 @@ export const useLogin = () => {
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
     setError(null);
+    setNeedsEmailVerification(false);
+    setUserEmail(data.email);
 
     try {
-      const apiClient = new ApiClient();
-
       const loginData: LoginModel = {
         email: data.email,
         password: data.password,
@@ -65,29 +69,44 @@ export const useLogin = () => {
           }
         }
 
-        // You can add navigation logic here
-        // For example: navigate('/dashboard');
+        // Redirect to dashboard after successful login
+        router.navigate({ to: '/dashboard' });
       } else {
         setError(response.message || 'Login failed. Please try again.');
+        if (response?.message?.toLowerCase().includes('check your email') ||
+          response?.message?.toLowerCase().includes('verify your account') ||
+          response.message?.toLowerCase().includes('email verification')) {
+          setNeedsEmailVerification(true);
+        }
       }
     } catch (err: any) {
       console.error('Login error:', err);
-      setError(
-        err?.body?.message ||
-        err?.message ||
-        'An unexpected error occurred. Please try again.'
-      );
+      const errorMessage = err?.body?.message || err?.message || 'An unexpected error occurred. Please try again.';
+
+      // Check if the error is about email verification
+      if (errorMessage.toLowerCase().includes('check your email') ||
+        errorMessage.toLowerCase().includes('verify your account') ||
+        errorMessage.toLowerCase().includes('email verification')) {
+        setNeedsEmailVerification(true);
+      }
+
+      setError(errorMessage);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const clearError = () => setError(null);
+  const clearError = () => {
+    setError(null);
+    setNeedsEmailVerification(false);
+  };
 
   return {
     form,
     isLoading,
     error,
+    needsEmailVerification,
+    userEmail,
     onSubmit: form.handleSubmit(onSubmit),
     clearError,
   };

@@ -6,7 +6,7 @@ import { useTheme } from '@/contexts/theme-context';
 import { Moon, Sun, Sparkles, Shield, Users } from 'lucide-react';
 
 export default function Login() {
-  const { form, isLoading, error, onSubmit, clearError } = useLogin();
+  const { form, isLoading, error, needsEmailVerification, userEmail, onSubmit, clearError } = useLogin();
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -68,6 +68,8 @@ export default function Login() {
               onSubmit={onSubmit}
               isLoading={isLoading}
               error={error}
+              needsEmailVerification={needsEmailVerification}
+              userEmail={userEmail}
               onClearError={clearError}
             />
           </CardContent>
@@ -77,9 +79,19 @@ export default function Login() {
         <div className="text-center animate-fade-in-up animation-delay-400">
           <p className="text-sm text-muted-foreground">
             Don't have an account?{' '}
-            <button className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-200">
-              Sign up
-            </button>
+            <a
+              href="/register"
+              className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
+            >
+              Sign up as User
+            </a>
+            {' or '}
+            <a
+              href="/register-vendor"
+              className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
+            >
+              Become a Vendor
+            </a>
           </p>
         </div>
 

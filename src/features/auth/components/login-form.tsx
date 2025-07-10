@@ -1,8 +1,7 @@
-import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, RefreshCw } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
@@ -14,20 +13,28 @@ import {
 } from '@/components/ui/form';
 import type { UseFormReturn } from 'react-hook-form';
 import type { LoginFormData } from '../hooks/use-login';
+import { useResendVerification } from '../hooks/use-resend-verification';
 
 interface LoginFormProps {
   form: UseFormReturn<LoginFormData>;
   onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
   isLoading: boolean;
   error: string | null;
+  needsEmailVerification: boolean;
+  userEmail: string;
   onClearError: () => void;
 }
 
-export function LoginForm({ form, onSubmit, isLoading, error, onClearError }: LoginFormProps) {
+export function LoginForm({ form, onSubmit, isLoading, error, needsEmailVerification, userEmail, onClearError }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const { resendVerification, isLoading: isResending, error: resendError, success: resendSuccess, clearMessages } = useResendVerification();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleResendVerification = async () => {
+    await resendVerification(userEmail);
   };
 
   return (
@@ -43,10 +50,83 @@ export function LoginForm({ form, onSubmit, isLoading, error, onClearError }: Lo
                 <div className="mt-2 text-sm text-red-700 dark:text-red-300">
                   <p>{error}</p>
                 </div>
+                <div className="mt-4 flex items-center space-x-4">
+                  {needsEmailVerification && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={handleResendVerification}
+                      disabled={isResending}
+                      className="text-sm font-medium text-red-800 dark:text-red-200 border-red-300 dark:border-red-700 hover:bg-red-100 dark:hover:bg-red-800/30"
+                    >
+                      {isResending ? (
+                        <>
+                          <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Mail className="w-4 h-4 mr-2" />
+                          Resend verification email
+                        </>
+                      )}
+                    </Button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClearError();
+                      clearMessages();
+                    }}
+                    className="text-sm font-medium text-red-800 dark:text-red-200 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200"
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {resendSuccess && (
+          <div className="rounded-md bg-green-50 dark:bg-green-900/20 p-4 border border-green-200 dark:border-green-800/30">
+            <div className="flex">
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-green-800 dark:text-green-200">
+                  Success
+                </h3>
+                <div className="mt-2 text-sm text-green-700 dark:text-green-300">
+                  <p>{resendSuccess}</p>
+                </div>
                 <div className="mt-4">
                   <button
                     type="button"
-                    onClick={onClearError}
+                    onClick={clearMessages}
+                    className="text-sm font-medium text-green-800 dark:text-green-200 hover:text-green-600 dark:hover:text-green-400 transition-colors duration-200"
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {resendError && (
+          <div className="rounded-md bg-red-50 dark:bg-red-900/20 p-4 border border-red-200 dark:border-red-800/30">
+            <div className="flex">
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-red-800 dark:text-red-200">
+                  Resend Error
+                </h3>
+                <div className="mt-2 text-sm text-red-700 dark:text-red-300">
+                  <p>{resendError}</p>
+                </div>
+                <div className="mt-4">
+                  <button
+                    type="button"
+                    onClick={clearMessages}
                     className="text-sm font-medium text-red-800 dark:text-red-200 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200"
                   >
                     Dismiss

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Star, TrendingUp, Users, DollarSign } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export function VendorHeroSection() {
   return (
@@ -37,13 +38,15 @@ export function VendorHeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg"
-              >
-                Start Selling Today
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/register-vendor">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 text-lg"
+                >
+                  Start Selling Today
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
               <Button
                 variant="outline"
                 size="lg"

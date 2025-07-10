@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Star, Users, Calendar, Shield } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 export function HeroSection() {
   return (
@@ -34,9 +35,11 @@ export function HeroSection() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in-up animation-delay-300">
-          <Button size="lg" className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:scale-105 transition-transform duration-200">
-            Get Started Free
-          </Button>
+          <Link to="/register">
+            <Button size="lg" className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:scale-105 transition-transform duration-200">
+              Get Started Free
+            </Button>
+          </Link>
           <Button variant="outline" size="lg" className="px-8 py-4 text-lg font-semibold hover:scale-105 transition-transform duration-200">
             Browse Services
           </Button>

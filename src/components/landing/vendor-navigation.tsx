@@ -67,9 +67,11 @@ export function VendorNavigation() {
                 Sign In
               </Button>
             </Link>
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-              Start Selling
-            </Button>
+            <Link to="/register-vendor">
+              <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                Get Started
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -118,9 +120,11 @@ export function VendorNavigation() {
                     Sign In
                   </Button>
                 </Link>
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                  Start Selling
-                </Button>
+                <Link to="/register-vendor">
+                  <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                    Get Started
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

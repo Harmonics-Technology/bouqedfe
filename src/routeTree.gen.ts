@@ -10,20 +10,46 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VendorsRouteImport } from './routes/vendors'
+import { Route as TestVerificationRouteImport } from './routes/test-verification'
+import { Route as RegisterVendorRouteImport } from './routes/register-vendor'
+import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
 import { Route as DemoTableRouteImport } from './routes/demo.table'
 import { Route as DemoSentryRouteImport } from './routes/demo.sentry'
+import { Route as DemoEmailVerificationRouteImport } from './routes/demo.email-verification'
+import { Route as RegisterVerifyTokenRouteImport } from './routes/register.verify.$token'
 
 const VendorsRoute = VendorsRouteImport.update({
   id: '/vendors',
   path: '/vendors',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TestVerificationRoute = TestVerificationRouteImport.update({
+  id: '/test-verification',
+  path: '/test-verification',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterVendorRoute = RegisterVendorRouteImport.update({
+  id: '/register-vendor',
+  path: '/register-vendor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -46,63 +72,114 @@ const DemoSentryRoute = DemoSentryRouteImport.update({
   path: '/demo/sentry',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoEmailVerificationRoute = DemoEmailVerificationRouteImport.update({
+  id: '/demo/email-verification',
+  path: '/demo/email-verification',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterVerifyTokenRoute = RegisterVerifyTokenRouteImport.update({
+  id: '/verify/$token',
+  path: '/verify/$token',
+  getParentRoute: () => RegisterRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/register': typeof RegisterRouteWithChildren
+  '/register-vendor': typeof RegisterVendorRoute
+  '/test-verification': typeof TestVerificationRoute
   '/vendors': typeof VendorsRoute
+  '/demo/email-verification': typeof DemoEmailVerificationRoute
   '/demo/sentry': typeof DemoSentryRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/register/verify/$token': typeof RegisterVerifyTokenRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/register': typeof RegisterRouteWithChildren
+  '/register-vendor': typeof RegisterVendorRoute
+  '/test-verification': typeof TestVerificationRoute
   '/vendors': typeof VendorsRoute
+  '/demo/email-verification': typeof DemoEmailVerificationRoute
   '/demo/sentry': typeof DemoSentryRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/register/verify/$token': typeof RegisterVerifyTokenRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/register': typeof RegisterRouteWithChildren
+  '/register-vendor': typeof RegisterVendorRoute
+  '/test-verification': typeof TestVerificationRoute
   '/vendors': typeof VendorsRoute
+  '/demo/email-verification': typeof DemoEmailVerificationRoute
   '/demo/sentry': typeof DemoSentryRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/register/verify/$token': typeof RegisterVerifyTokenRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dashboard'
     | '/login'
+    | '/register'
+    | '/register-vendor'
+    | '/test-verification'
     | '/vendors'
+    | '/demo/email-verification'
     | '/demo/sentry'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/register/verify/$token'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/dashboard'
     | '/login'
+    | '/register'
+    | '/register-vendor'
+    | '/test-verification'
     | '/vendors'
+    | '/demo/email-verification'
     | '/demo/sentry'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/register/verify/$token'
   id:
     | '__root__'
     | '/'
+    | '/dashboard'
     | '/login'
+    | '/register'
+    | '/register-vendor'
+    | '/test-verification'
     | '/vendors'
+    | '/demo/email-verification'
     | '/demo/sentry'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/register/verify/$token'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRouteWithChildren
+  RegisterVendorRoute: typeof RegisterVendorRoute
+  TestVerificationRoute: typeof TestVerificationRoute
   VendorsRoute: typeof VendorsRoute
+  DemoEmailVerificationRoute: typeof DemoEmailVerificationRoute
   DemoSentryRoute: typeof DemoSentryRoute
   DemoTableRoute: typeof DemoTableRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
@@ -117,11 +194,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VendorsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/test-verification': {
+      id: '/test-verification'
+      path: '/test-verification'
+      fullPath: '/test-verification'
+      preLoaderRoute: typeof TestVerificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register-vendor': {
+      id: '/register-vendor'
+      path: '/register-vendor'
+      fullPath: '/register-vendor'
+      preLoaderRoute: typeof RegisterVendorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -152,13 +257,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoSentryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo/email-verification': {
+      id: '/demo/email-verification'
+      path: '/demo/email-verification'
+      fullPath: '/demo/email-verification'
+      preLoaderRoute: typeof DemoEmailVerificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register/verify/$token': {
+      id: '/register/verify/$token'
+      path: '/verify/$token'
+      fullPath: '/register/verify/$token'
+      preLoaderRoute: typeof RegisterVerifyTokenRouteImport
+      parentRoute: typeof RegisterRoute
+    }
   }
 }
 
+interface RegisterRouteChildren {
+  RegisterVerifyTokenRoute: typeof RegisterVerifyTokenRoute
+}
+
+const RegisterRouteChildren: RegisterRouteChildren = {
+  RegisterVerifyTokenRoute: RegisterVerifyTokenRoute,
+}
+
+const RegisterRouteWithChildren = RegisterRoute._addFileChildren(
+  RegisterRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRouteWithChildren,
+  RegisterVendorRoute: RegisterVendorRoute,
+  TestVerificationRoute: TestVerificationRoute,
   VendorsRoute: VendorsRoute,
+  DemoEmailVerificationRoute: DemoEmailVerificationRoute,
   DemoSentryRoute: DemoSentryRoute,
   DemoTableRoute: DemoTableRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
