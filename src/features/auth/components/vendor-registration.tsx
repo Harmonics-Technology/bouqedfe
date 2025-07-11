@@ -51,6 +51,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="Enter your first name"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -72,6 +73,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="Enter your last name"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -95,6 +97,7 @@ export default function VendorRegistration() {
                     <Input
                       type="email"
                       placeholder="Enter your personal email"
+                      autoComplete="off"
                       {...field}
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                     />
@@ -117,6 +120,7 @@ export default function VendorRegistration() {
                     <Input
                       type="tel"
                       placeholder="Enter your personal phone number"
+                      autoComplete="off"
                       {...field}
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                     />
@@ -145,6 +149,7 @@ export default function VendorRegistration() {
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="Create a secure password"
+                        autoComplete="new-password"
                         {...field}
                         className="pr-10 transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -185,6 +190,7 @@ export default function VendorRegistration() {
                       <Input
                         type={showConfirmPassword ? "text" : "password"}
                         placeholder="Confirm your password"
+                        autoComplete="new-password"
                         {...field}
                         className="pr-10 transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -259,6 +265,7 @@ export default function VendorRegistration() {
                   <FormControl>
                     <Input
                       placeholder="Enter your business name"
+                      autoComplete="off"
                       {...field}
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                     />
@@ -280,6 +287,7 @@ export default function VendorRegistration() {
                   <FormControl>
                     <Textarea
                       placeholder="Describe your business and the services you offer..."
+                      autoComplete="off"
                       className="min-h-[100px] transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       {...field}
                     />
@@ -303,6 +311,7 @@ export default function VendorRegistration() {
                       <Input
                         type="email"
                         placeholder="business@example.com"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -325,6 +334,7 @@ export default function VendorRegistration() {
                       <Input
                         type="tel"
                         placeholder="Business phone number"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -347,6 +357,7 @@ export default function VendorRegistration() {
                   <FormControl>
                     <Input
                       placeholder="Enter your business address"
+                      autoComplete="off"
                       {...field}
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                     />
@@ -366,6 +377,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="City"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -384,6 +396,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="State"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -402,6 +415,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="Zip Code"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -421,6 +435,7 @@ export default function VendorRegistration() {
                   <FormControl>
                     <Input
                       placeholder="Country"
+                      autoComplete="off"
                       {...field}
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                     />
@@ -443,6 +458,7 @@ export default function VendorRegistration() {
                     <Input
                       type="url"
                       placeholder="https://your-website.com"
+                      autoComplete="off"
                       {...field}
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                     />
@@ -477,6 +493,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="Facebook page URL"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -498,6 +515,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="Instagram profile URL"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -519,6 +537,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="Twitter profile URL"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -540,6 +559,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="LinkedIn profile URL"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -561,6 +581,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="YouTube channel URL"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -582,6 +603,7 @@ export default function VendorRegistration() {
                     <FormControl>
                       <Input
                         placeholder="University affiliation"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -616,7 +638,7 @@ export default function VendorRegistration() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-background to-purple-50 dark:from-gray-900 dark:via-background dark:to-purple-900/20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-blue-50 via-background to-purple-50 dark:from-gray-900 dark:via-background dark:to-purple-900/20 px-4 sm:px-6 lg:px-8 relative overflow-hidden py-8">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200 dark:bg-blue-900/30 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-xl opacity-70 animate-blob"></div>
@@ -638,7 +660,7 @@ export default function VendorRegistration() {
         )}
       </Button>
 
-      <div className="max-w-3xl w-full space-y-8 relative z-10">
+      <div className="max-w-3xl w-full space-y-8 relative z-10 mx-auto" style={{ marginTop: 'max(2rem, calc(50vh - 600px))' }}>
         {/* Header */}
         <div className="text-center animate-fade-in-up">
           <div className="flex items-center justify-center mb-4">
@@ -673,7 +695,7 @@ export default function VendorRegistration() {
 
         {/* Registration Form */}
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="animate-fade-in-up animation-delay-200">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="animate-fade-in-up animation-delay-200" autoComplete="off">
             <RegistrationStep
               title={currentStepData.title}
               description={currentStepData.description}
