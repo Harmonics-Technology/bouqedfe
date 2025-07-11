@@ -1,14 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 import {
     Calendar,
     Clock,
-    TrendingUp,
-    Users,
-    DollarSign,
     ShoppingBag,
     Heart,
-    Eye,
     CheckCircle,
     XCircle,
     AlertCircle,

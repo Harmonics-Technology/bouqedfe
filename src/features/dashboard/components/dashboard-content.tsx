@@ -1,22 +1,13 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import {
-    Calendar,
-    Clock,
     TrendingUp,
-    Users,
     Star,
-    MapPin,
-    ArrowRight,
     Plus,
-    Eye,
     Heart,
     ShoppingBag,
 } from 'lucide-react';
 import type { UserView } from '@/api/models/UserView';
-import type { VendorDashboardView } from '@/api/models/VendorDashboardView';
 import { DashboardStats } from './dashboard-stats';
 import { RecentBookings } from './recent-bookings';
 import { RecentlyViewed } from './recently-viewed';

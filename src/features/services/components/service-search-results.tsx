@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Star, MapPin, Clock, Heart, AlertCircle } from "lucide-react";
+import { Star, MapPin, Heart, AlertCircle } from "lucide-react";
 import type { ServiceView } from "@/api/models/ServiceView";
 
 interface ServiceSearchResultsProps {

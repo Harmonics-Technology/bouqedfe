@@ -5,7 +5,6 @@ import { z } from 'zod';
 import { useNavigate } from '@tanstack/react-router';
 import { apiClient } from '@/api/client';
 import type { RegisterModel } from '@/api/models/RegisterModel';
-import type { BusinessModel } from '@/api/models/BusinessModel';
 import type { VendorRegisterModel } from '@/api/models/VendorRegisterModel';
 
 // Registration success callback type

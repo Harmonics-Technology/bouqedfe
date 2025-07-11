@@ -8,7 +8,6 @@ import {
     Clock,
     ArrowRight,
     Heart,
-    Bookmark,
 } from 'lucide-react';
 
 export function RecentlyViewed() {

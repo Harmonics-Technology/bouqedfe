@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTheme } from '@/contexts/theme-context';
-import { Button } from '@/components/ui/button';
-import { Moon, Sun, Bell, User, Settings, LogOut } from 'lucide-react';
 import { DashboardHeader } from './dashboard-header';
 import { DashboardSidebar } from './dashboard-sidebar';
 import { DashboardContent } from './dashboard-content';

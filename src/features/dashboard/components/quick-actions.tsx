@@ -5,10 +5,8 @@ import {
     Search,
     Calendar,
     Heart,
-    Settings,
     BarChart3,
     Users,
-    MessageSquare,
     Star,
     Zap,
 } from 'lucide-react';

@@ -29,12 +29,12 @@ export const Route = createFileRoute("/demo/table")({
 });
 
 declare module "@tanstack/react-table" {
-	type FilterFns = {
+	interface FilterFns {
 		fuzzy: FilterFn<unknown>;
-	};
-	type FilterMeta = {
+	}
+	interface FilterMeta {
 		itemRank: RankingInfo;
-	};
+	}
 }
 
 // Define a custom fuzzy filter function that will apply ranking info to rows (using match-sorter utils)
