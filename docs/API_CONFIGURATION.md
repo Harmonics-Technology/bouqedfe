@@ -75,7 +75,7 @@ console.log('Current API URL:', getApiBaseUrl());
 
 ## API Regeneration
 
-When you regenerate the API using `npm run generate:api`, your custom configuration in:
+When you regenerate the API using `pnpm run generate:api`, your custom configuration in:
 - `src/api/config.ts`
 - `src/api/client.ts`
 
@@ -113,6 +113,6 @@ Make sure your `VITE_API_WITH_CREDENTIALS` and `VITE_API_CREDENTIALS` are set co
 
 ### Different URLs for different environments
 Use the appropriate environment file:
-- `.env.development` for `npm run dev`
-- `.env.production` for `npm run build`
+- `.env.development` for `pnpm run dev`
+- `.env.production` for `pnpm run build`
 - `.env.local` for local overrides (ignored by git)

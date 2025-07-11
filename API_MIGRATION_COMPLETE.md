@@ -14,7 +14,7 @@ Your API client has been successfully configured to use environment variables in
 ### 1. Set up your environment files
 ```bash
 # Copy example files and customize
-npm run setup:api
+pnpm run setup:api
 ```
 
 ### 2. Update your API URLs
@@ -55,13 +55,13 @@ src/api/
 ```
 
 **🔒 Safe to edit** - These files won't be overwritten during API regeneration
-**⚠️ Generated** - These files will be overwritten when you run `npm run generate:api`
+**⚠️ Generated** - These files will be overwritten when you run `pnpm run generate:api`
 
 ## Migration Help
 
 If you have existing API imports to update:
 ```bash
-npm run migrate:api
+pnpm run migrate:api
 ```
 
 This will automatically update your imports from the old pattern to the new one.
@@ -89,8 +89,8 @@ This will automatically update your imports from the old pattern to the new one.
 ## Need Help?
 
 - Check `docs/API_CONFIGURATION.md` for detailed documentation
-- Run `npm run setup:api` to initialize environment files
-- Run `npm run migrate:api` to update existing imports
+- Run `pnpm run setup:api` to initialize environment files
+- Run `pnpm run migrate:api` to update existing imports
 
 ---
 
