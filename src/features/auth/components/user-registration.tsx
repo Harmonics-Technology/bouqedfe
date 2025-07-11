@@ -47,6 +47,7 @@ export default function UserRegistration() {
                     <FormControl>
                       <Input
                         placeholder="Enter your first name"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -68,6 +69,7 @@ export default function UserRegistration() {
                     <FormControl>
                       <Input
                         placeholder="Enter your last name"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -91,6 +93,7 @@ export default function UserRegistration() {
                     <Input
                       type="email"
                       placeholder="Enter your email address"
+                      autoComplete="off"
                       {...field}
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                     />
@@ -113,6 +116,7 @@ export default function UserRegistration() {
                     <Input
                       type="tel"
                       placeholder="Enter your phone number"
+                      autoComplete="off"
                       {...field}
                       className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                     />
@@ -141,6 +145,7 @@ export default function UserRegistration() {
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="Create a secure password"
+                        autoComplete="new-password"
                         {...field}
                         className="pr-10 transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -181,6 +186,7 @@ export default function UserRegistration() {
                       <Input
                         type={showConfirmPassword ? "text" : "password"}
                         placeholder="Confirm your password"
+                        autoComplete="new-password"
                         {...field}
                         className="pr-10 transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -267,6 +273,7 @@ export default function UserRegistration() {
                     <FormControl>
                       <Input
                         placeholder="Enter your university or college name"
+                        autoComplete="off"
                         {...field}
                         className="transition-all duration-200 focus:ring-2 focus:ring-primary/20"
                       />
@@ -293,7 +300,7 @@ export default function UserRegistration() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-background to-purple-50 dark:from-gray-900 dark:via-background dark:to-purple-900/20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-blue-50 via-background to-purple-50 dark:from-gray-900 dark:via-background dark:to-purple-900/20 px-4 sm:px-6 lg:px-8 relative overflow-hidden py-8">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200 dark:bg-blue-900/30 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-xl opacity-70 animate-blob"></div>
@@ -315,7 +322,7 @@ export default function UserRegistration() {
         )}
       </Button>
 
-      <div className="max-w-2xl w-full space-y-8 relative z-10">
+      <div className="max-w-2xl w-full space-y-8 relative z-10 mx-auto" style={{ marginTop: 'max(2rem, calc(50vh - 500px))' }}>
         {/* Header */}
         <div className="text-center animate-fade-in-up">
           <div className="flex items-center justify-center mb-4">
@@ -350,7 +357,7 @@ export default function UserRegistration() {
 
         {/* Registration Form */}
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="animate-fade-in-up animation-delay-200">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="animate-fade-in-up animation-delay-200" autoComplete="off">
             <RegistrationStep
               title={currentStepData.title}
               description={currentStepData.description}

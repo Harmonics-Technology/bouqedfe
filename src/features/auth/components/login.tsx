@@ -10,7 +10,7 @@ export default function Login() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-background to-purple-50 dark:from-gray-900 dark:via-background dark:to-purple-900/20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-blue-50 via-background to-purple-50 dark:from-gray-900 dark:via-background dark:to-purple-900/20 px-4 sm:px-6 lg:px-8 relative overflow-hidden py-8">
       {/* Background decoration - similar to landing page */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200 dark:bg-blue-900/30 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-xl opacity-70 animate-blob"></div>
@@ -32,7 +32,7 @@ export default function Login() {
         )}
       </Button>
 
-      <div className="max-w-md w-full space-y-8 relative z-10">
+      <div className="max-w-md w-full space-y-8 relative z-10 mx-auto" style={{ marginTop: 'max(2rem, calc(50vh - 400px))' }}>
         {/* Header */}
         <div className="text-center animate-fade-in-up">
           <div className="flex items-center justify-center mb-4">

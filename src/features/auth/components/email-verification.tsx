@@ -34,8 +34,8 @@ export function EmailVerification() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-background to-purple-50 dark:from-gray-900 dark:via-background dark:to-purple-900/20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex flex-col justify-start bg-gradient-to-br from-blue-50 via-background to-purple-50 dark:from-gray-900 dark:via-background dark:to-purple-900/20 px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-md w-full space-y-8 mx-auto" style={{ marginTop: 'max(2rem, calc(50vh - 300px))' }}>
         <Card className="shadow-2xl border-0 bg-card/80 backdrop-blur-sm">
           <CardHeader className="space-y-1 pb-6 text-center">
             <div className="flex justify-center mb-4">

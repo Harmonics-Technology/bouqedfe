@@ -9,7 +9,7 @@ export function Navigation() {
   const { theme, toggleTheme } = useTheme();
 
   const navItems = [
-    { label: "Services", href: "#services" },
+    { label: "Browse Services", href: "/services" },
     { label: "How it Works", href: "#how-it-works" },
     { label: "Features", href: "#features" },
     { label: "Testimonials", href: "#testimonials" },
@@ -35,13 +35,23 @@ export function Navigation() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-foreground hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
-                >
-                  {item.label}
-                </a>
+                item.href.startsWith('/') ? (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="text-foreground hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="text-foreground hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
+                  >
+                    {item.label}
+                  </a>
+                )
               ))}
             </div>
           </div>
@@ -91,14 +101,25 @@ export function Navigation() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t border-border">
               {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="text-foreground hover:text-blue-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
+                item.href.startsWith('/') ? (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    className="text-foreground hover:text-blue-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="text-foreground hover:text-blue-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                )
               ))}
               <div className="pt-4 pb-2 space-y-2">
                 <Link to="/vendors">

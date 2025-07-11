@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VendorsRouteImport } from './routes/vendors'
 import { Route as TestVerificationRouteImport } from './routes/test-verification'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as RegisterVendorRouteImport } from './routes/register-vendor'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
@@ -30,6 +31,11 @@ const VendorsRoute = VendorsRouteImport.update({
 const TestVerificationRoute = TestVerificationRouteImport.update({
   id: '/test-verification',
   path: '/test-verification',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegisterVendorRoute = RegisterVendorRouteImport.update({
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRouteWithChildren
   '/register-vendor': typeof RegisterVendorRoute
+  '/services': typeof ServicesRoute
   '/test-verification': typeof TestVerificationRoute
   '/vendors': typeof VendorsRoute
   '/demo/email-verification': typeof DemoEmailVerificationRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRouteWithChildren
   '/register-vendor': typeof RegisterVendorRoute
+  '/services': typeof ServicesRoute
   '/test-verification': typeof TestVerificationRoute
   '/vendors': typeof VendorsRoute
   '/demo/email-verification': typeof DemoEmailVerificationRoute
@@ -118,6 +126,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRouteWithChildren
   '/register-vendor': typeof RegisterVendorRoute
+  '/services': typeof ServicesRoute
   '/test-verification': typeof TestVerificationRoute
   '/vendors': typeof VendorsRoute
   '/demo/email-verification': typeof DemoEmailVerificationRoute
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/register-vendor'
+    | '/services'
     | '/test-verification'
     | '/vendors'
     | '/demo/email-verification'
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/register-vendor'
+    | '/services'
     | '/test-verification'
     | '/vendors'
     | '/demo/email-verification'
@@ -162,6 +173,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/register-vendor'
+    | '/services'
     | '/test-verification'
     | '/vendors'
     | '/demo/email-verification'
@@ -177,6 +189,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRouteWithChildren
   RegisterVendorRoute: typeof RegisterVendorRoute
+  ServicesRoute: typeof ServicesRoute
   TestVerificationRoute: typeof TestVerificationRoute
   VendorsRoute: typeof VendorsRoute
   DemoEmailVerificationRoute: typeof DemoEmailVerificationRoute
@@ -199,6 +212,13 @@ declare module '@tanstack/react-router' {
       path: '/test-verification'
       fullPath: '/test-verification'
       preLoaderRoute: typeof TestVerificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/register-vendor': {
@@ -292,6 +312,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRouteWithChildren,
   RegisterVendorRoute: RegisterVendorRoute,
+  ServicesRoute: ServicesRoute,
   TestVerificationRoute: TestVerificationRoute,
   VendorsRoute: VendorsRoute,
   DemoEmailVerificationRoute: DemoEmailVerificationRoute,
