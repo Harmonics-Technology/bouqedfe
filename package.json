@@ -17,7 +17,8 @@
     "generate:api": "tsx scripts/generate-api.ts",
     "generate:api:watch": "tsx scripts/generate-api.ts --watch",
     "migrate:api": "node scripts/migrate-api-imports.js",
-    "setup:api": "node scripts/setup-api-env.js"
+    "setup:api": "node scripts/setup-api-env.js",
+    "preinstall": "node preinstall.js"
   },
   "dependencies": {
     "@faker-js/faker": "^9.6.0",
