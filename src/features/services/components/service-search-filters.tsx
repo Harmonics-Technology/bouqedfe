@@ -39,7 +39,7 @@ export function ServiceSearchFilters({ filters, onFilterChange, onClearFilters }
     const activeFiltersCount = getActiveFiltersCount();
 
     return (
-        <Card className="p-6 sticky top-24">
+        <Card className="p-6 sticky top-48">
             <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                     <Filter className="h-5 w-5 text-muted-foreground" />

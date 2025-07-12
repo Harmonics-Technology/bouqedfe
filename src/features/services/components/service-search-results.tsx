@@ -1,7 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Star, MapPin, Heart, AlertCircle } from "lucide-react";
+import { Star, MapPin, Heart, AlertCircle, Loader2 } from "lucide-react";
+import { useEffect, useRef } from "react";
 import type { ServiceView } from "@/api/models/ServiceView";
 
 interface ServiceSearchResultsProps {
@@ -9,9 +10,58 @@ interface ServiceSearchResultsProps {
     isLoading: boolean;
     error: any;
     onRetry: () => void;
+    fetchNextPage?: () => void;
+    hasNextPage?: boolean;
+    isFetchingNextPage?: boolean;
 }
 
-export function ServiceSearchResults({ services, isLoading, error, onRetry }: ServiceSearchResultsProps) {
+export function ServiceSearchResults({
+    services,
+    isLoading,
+    error,
+    onRetry,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage
+}: ServiceSearchResultsProps) {
+    const loadMoreRef = useRef<HTMLDivElement>(null);
+    const isRequestingRef = useRef(false);
+
+    // Intersection Observer for infinite scroll
+    useEffect(() => {
+        if (!fetchNextPage || !hasNextPage || isFetchingNextPage || isRequestingRef.current) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage && !isRequestingRef.current) {
+                    isRequestingRef.current = true;
+                    fetchNextPage();
+                }
+            },
+            {
+                threshold: 0.1,
+                rootMargin: '100px' // Trigger 100px before the element comes into view
+            }
+        );
+
+        const currentRef = loadMoreRef.current;
+        if (currentRef) {
+            observer.observe(currentRef);
+        }
+
+        return () => {
+            if (currentRef) {
+                observer.unobserve(currentRef);
+            }
+        };
+    }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+
+    // Reset the requesting flag when fetching completes or when hasNextPage changes to false
+    useEffect(() => {
+        if (!isFetchingNextPage || !hasNextPage) {
+            isRequestingRef.current = false;
+        }
+    }, [isFetchingNextPage, hasNextPage]);
     if (isLoading) {
         return (
             <div className="space-y-6">
@@ -67,6 +117,33 @@ export function ServiceSearchResults({ services, isLoading, error, onRetry }: Se
             {services.map((service) => (
                 <ServiceCard key={service.id} service={service} />
             ))}
+
+            {/* Infinite scroll trigger */}
+            {hasNextPage && (
+                <div ref={loadMoreRef} className="flex justify-center py-8">
+                    {isFetchingNextPage ? (
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                            <Loader2 className="h-5 w-5 animate-spin" />
+                            <span>Loading more services...</span>
+                        </div>
+                    ) : (
+                        <Button
+                            variant="outline"
+                            onClick={fetchNextPage}
+                            className="px-8"
+                        >
+                            Load More Services
+                        </Button>
+                    )}
+                </div>
+            )}
+
+            {/* End of results indicator */}
+            {!hasNextPage && services.length > 0 && (
+                <div className="text-center py-8 text-muted-foreground">
+                    <p>You've reached the end of the results</p>
+                </div>
+            )}
         </div>
     );
 }
