@@ -1,7 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/api/client";
-import type { ServiceView } from "@/api/models/ServiceView";
-import type { ReviewView } from "@/api/models/ReviewView";
 
 export function useServiceDetail(serviceId: string) {
     return useQuery({

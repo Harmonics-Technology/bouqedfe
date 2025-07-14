@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Button } from "./button";
 import { Card } from "./card";
-import { ChevronLeft, ChevronRight, X, Play, Pause, Volume2, VolumeX, Maximize2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Play, Pause, Maximize2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface MediaItem {
@@ -216,11 +216,6 @@ interface MediaModalProps {
 }
 
 export function MediaModal({ media, currentIndex, isOpen, onClose, onIndexChange }: MediaModalProps) {
-    const [videoState, setVideoState] = useState({
-        isPlaying: false,
-        isMuted: false,
-        volume: 1
-    });
 
     const nextMedia = () => {
         onIndexChange((currentIndex + 1) % media.length);

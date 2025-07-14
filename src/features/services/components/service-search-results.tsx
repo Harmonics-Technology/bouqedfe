@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MediaCarousel, MediaModal, type MediaItem } from "@/components/ui/media-carousel";
+import { MediaModal, type MediaItem } from "@/components/ui/media-carousel";
 import { SimpleMediaCarousel } from "@/components/ui/simple-media-carousel";
 import { Star, MapPin, Heart, AlertCircle, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -203,7 +203,7 @@ function ServiceCard({ service }: ServiceCardProps) {
         });
     }
 
-    const handleMediaClick = (media: MediaItem, index: number) => {
+    const handleMediaClick = (_media: MediaItem, index: number) => {
         setModalIndex(index);
         setModalOpen(true);
     };

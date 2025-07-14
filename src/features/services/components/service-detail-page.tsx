@@ -10,21 +10,16 @@ import {
     Heart,
     Share2,
     Clock,
-    Phone,
-    Mail,
     ArrowLeft,
     Calendar,
     CheckCircle,
     Users,
     Award,
     Camera,
-    MessageCircle,
-    ChevronLeft,
-    ChevronRight
+    MessageCircle
 } from "lucide-react";
 import { useServiceDetail, useServiceReviews } from "../hooks/use-service-detail";
 import { useState } from "react";
-import type { ServiceView } from "@/api/models/ServiceView";
 import type { ReviewView } from "@/api/models/ReviewView";
 
 export function ServiceDetailPage() {
@@ -68,7 +63,7 @@ export function ServiceDetailPage() {
         });
     }
 
-    const handleMediaClick = (media: MediaItem, index: number) => {
+    const handleMediaClick = (_media: MediaItem, index: number) => {
         setModalIndex(index);
         setModalOpen(true);
     };
