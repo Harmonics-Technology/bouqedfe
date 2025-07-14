@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from '@tanstack/react-router';
 import * as yup from 'yup';
+import axios from 'axios';
 
 const loginSchema = yup.object({
   email: yup
@@ -50,6 +51,9 @@ export const useLogin = () => {
         password: data.password,
         isVendor: data.isVendor,
       };
+
+      const res = axios.get('http://revlr-api-dev-g6dtb4cebbfpfgcv.canadacentral-01.azurewebsites.net/api/Events?IncludeTickets=true');
+      console.log('API Response:', res);
 
       const response = await apiClient.user.loginUser({
         requestBody: loginData,

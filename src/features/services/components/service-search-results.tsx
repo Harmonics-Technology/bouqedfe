@@ -1,8 +1,11 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { MediaCarousel, MediaModal, type MediaItem } from "@/components/ui/media-carousel";
+import { SimpleMediaCarousel } from "@/components/ui/simple-media-carousel";
 import { Star, MapPin, Heart, AlertCircle, Loader2 } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import type { ServiceView } from "@/api/models/ServiceView";
 
 interface ServiceSearchResultsProps {
@@ -153,6 +156,9 @@ interface ServiceCardProps {
 }
 
 function ServiceCard({ service }: ServiceCardProps) {
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalIndex, setModalIndex] = useState(0);
+
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat('en-NG', {
             style: 'currency',
@@ -173,25 +179,55 @@ function ServiceCard({ service }: ServiceCardProps) {
         ));
     };
 
+    // Prepare media items from service data
+    const mediaItems: MediaItem[] = [];
+
+    // Add banner image if available
+    if (service.bannerImageURL) {
+        mediaItems.push({
+            id: 'banner',
+            url: service.bannerImageURL,
+            type: 'image'
+        });
+    }
+
+    // Add additional media if available
+    if (service.media && service.media.length > 0) {
+        service.media.forEach((media, index) => {
+            if (media.url) {
+                mediaItems.push({
+                    id: media.id || `media-${index}`,
+                    url: media.url
+                });
+            }
+        });
+    }
+
+    const handleMediaClick = (media: MediaItem, index: number) => {
+        setModalIndex(index);
+        setModalOpen(true);
+    };
+
     return (
-        <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
-            <div className="flex gap-6">
-                {/* Service Image */}
-                <div className="flex-shrink-0">
-                    <div className="w-32 h-32 bg-muted rounded-lg overflow-hidden">
-                        {service.bannerImageURL ? (
-                            <img
-                                src={service.bannerImageURL}
-                                alt={service.name || 'Service'}
-                                className="w-full h-full object-cover"
+        <>
+            <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+                <div className="flex gap-6">
+                    {/* Service Media Carousel */}
+                    <div className="flex-shrink-0 w-32">
+                        {mediaItems.length > 0 ? (
+                            <SimpleMediaCarousel
+                                media={mediaItems}
+                                aspectRatio="square"
+                                className="w-32 h-32"
+                                autoPlay={true}
+                                onMediaClick={handleMediaClick}
                             />
                         ) : (
-                            <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                            <div className="w-32 h-32 bg-muted rounded-lg flex items-center justify-center text-muted-foreground">
                                 <div className="text-4xl">🎯</div>
                             </div>
                         )}
                     </div>
-                </div>
 
                 {/* Service Details */}
                 <div className="flex-1 min-w-0">
@@ -250,9 +286,11 @@ function ServiceCard({ service }: ServiceCardProps) {
                             {formatPrice(service.price || 0)}
                         </div>
                         <div className="flex gap-2">
-                            <Button variant="outline" size="sm">
-                                View Details
-                            </Button>
+                            <Link to="/services/$serviceId" params={{ serviceId: service.id || '' }}>
+                                <Button variant="outline" size="sm">
+                                    View Details
+                                </Button>
+                            </Link>
                             <Button size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
                                 Book Now
                             </Button>
@@ -261,5 +299,15 @@ function ServiceCard({ service }: ServiceCardProps) {
                 </div>
             </div>
         </Card>
+
+        {/* Media Modal */}
+        <MediaModal
+            media={mediaItems}
+            currentIndex={modalIndex}
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            onIndexChange={setModalIndex}
+        />
+    </>
     );
 }

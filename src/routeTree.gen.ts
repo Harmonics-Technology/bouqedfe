@@ -17,6 +17,8 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesServiceIdRouteImport } from './routes/services.$serviceId'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
 import { Route as DemoTableRouteImport } from './routes/demo.table'
 import { Route as DemoSentryRouteImport } from './routes/demo.sentry'
@@ -63,6 +65,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesServiceIdRoute = ServicesServiceIdRouteImport.update({
+  id: '/$serviceId',
+  path: '/$serviceId',
+  getParentRoute: () => ServicesRoute,
+} as any)
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   id: '/demo/tanstack-query',
   path: '/demo/tanstack-query',
@@ -95,13 +107,15 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRouteWithChildren
   '/register-vendor': typeof RegisterVendorRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
   '/test-verification': typeof TestVerificationRoute
   '/vendors': typeof VendorsRoute
   '/demo/email-verification': typeof DemoEmailVerificationRoute
   '/demo/sentry': typeof DemoSentryRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/services/$serviceId': typeof ServicesServiceIdRoute
+  '/services/': typeof ServicesIndexRoute
   '/register/verify/$token': typeof RegisterVerifyTokenRoute
 }
 export interface FileRoutesByTo {
@@ -110,13 +124,14 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRouteWithChildren
   '/register-vendor': typeof RegisterVendorRoute
-  '/services': typeof ServicesRoute
   '/test-verification': typeof TestVerificationRoute
   '/vendors': typeof VendorsRoute
   '/demo/email-verification': typeof DemoEmailVerificationRoute
   '/demo/sentry': typeof DemoSentryRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/services/$serviceId': typeof ServicesServiceIdRoute
+  '/services': typeof ServicesIndexRoute
   '/register/verify/$token': typeof RegisterVerifyTokenRoute
 }
 export interface FileRoutesById {
@@ -126,13 +141,15 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRouteWithChildren
   '/register-vendor': typeof RegisterVendorRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
   '/test-verification': typeof TestVerificationRoute
   '/vendors': typeof VendorsRoute
   '/demo/email-verification': typeof DemoEmailVerificationRoute
   '/demo/sentry': typeof DemoSentryRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/services/$serviceId': typeof ServicesServiceIdRoute
+  '/services/': typeof ServicesIndexRoute
   '/register/verify/$token': typeof RegisterVerifyTokenRoute
 }
 export interface FileRouteTypes {
@@ -150,6 +167,8 @@ export interface FileRouteTypes {
     | '/demo/sentry'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/services/$serviceId'
+    | '/services/'
     | '/register/verify/$token'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -158,13 +177,14 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/register-vendor'
-    | '/services'
     | '/test-verification'
     | '/vendors'
     | '/demo/email-verification'
     | '/demo/sentry'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/services/$serviceId'
+    | '/services'
     | '/register/verify/$token'
   id:
     | '__root__'
@@ -180,6 +200,8 @@ export interface FileRouteTypes {
     | '/demo/sentry'
     | '/demo/table'
     | '/demo/tanstack-query'
+    | '/services/$serviceId'
+    | '/services/'
     | '/register/verify/$token'
   fileRoutesById: FileRoutesById
 }
@@ -189,7 +211,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRouteWithChildren
   RegisterVendorRoute: typeof RegisterVendorRoute
-  ServicesRoute: typeof ServicesRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
   TestVerificationRoute: typeof TestVerificationRoute
   VendorsRoute: typeof VendorsRoute
   DemoEmailVerificationRoute: typeof DemoEmailVerificationRoute
@@ -256,6 +278,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/': {
+      id: '/services/'
+      path: '/'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/$serviceId': {
+      id: '/services/$serviceId'
+      path: '/$serviceId'
+      fullPath: '/services/$serviceId'
+      preLoaderRoute: typeof ServicesServiceIdRouteImport
+      parentRoute: typeof ServicesRoute
+    }
     '/demo/tanstack-query': {
       id: '/demo/tanstack-query'
       path: '/demo/tanstack-query'
@@ -306,13 +342,27 @@ const RegisterRouteWithChildren = RegisterRoute._addFileChildren(
   RegisterRouteChildren,
 )
 
+interface ServicesRouteChildren {
+  ServicesServiceIdRoute: typeof ServicesServiceIdRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesServiceIdRoute: ServicesServiceIdRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRouteWithChildren,
   RegisterVendorRoute: RegisterVendorRoute,
-  ServicesRoute: ServicesRoute,
+  ServicesRoute: ServicesRouteWithChildren,
   TestVerificationRoute: TestVerificationRoute,
   VendorsRoute: VendorsRoute,
   DemoEmailVerificationRoute: DemoEmailVerificationRoute,
